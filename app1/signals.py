@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save,post_save
+from django.db.models.signals import pre_save,post_save,pre_delete,post_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from .models import UserProfile
@@ -22,6 +22,19 @@ def post_save_signal_handle(sender,instance,created,**kwargs):
         print('your profile also created')
     else:
         print('no changes made to your profile,while you are updating your credential')
+
+@receiver(pre_delete,sender=User)
+def pre_delete_signal_handle(sender,instance,**kwargs):
+    print(f'we are going to delete {instance.username} credential')
+
+
+@receiver(post_delete,sender=User)
+def post_delete_signale_handle(sender,instance,**kwargs):
+    print(f'user with id {instance.id} is deleted')
+
+    
+
+
         
 
 

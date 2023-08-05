@@ -33,7 +33,20 @@ class Registration(View):
             
         except Exception as e:
             print(e)
-            return HttpResponse({'error':e})
+            return HttpResponse(e)
+        
+
+class Deleting(View):
+    def delete(self,request,id):
+        try:
+            user = User.objects.get(id=id)
+            if user:
+                user.delete()
+                return HttpResponse(f'user {user} deleted sussessfully')
+        except Exception as e:
+            print(e)
+            return HttpResponse(f'user with id {id} not found')
+
 
 class Checking(View):
     def get(self,request):
@@ -41,5 +54,5 @@ class Checking(View):
             return HttpResponse('checking')
         except Exception as e:
             print(e)
-            return HttpResponse({'error':e})
+            return HttpResponse(e)
 
