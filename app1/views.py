@@ -48,11 +48,5 @@ class Deleting(View):
             return HttpResponse(f'user with id {id} not found')
 
 
-class Checking(View):
-    def get(self,request):
-        try:     
-            return HttpResponse('checking')
-        except Exception as e:
-            print(e)
-            return HttpResponse(e)
+
 
